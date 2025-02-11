@@ -124,19 +124,20 @@ let addToCartLink = document.getElementById('addToCartLink'); // add to cart btn
 let radioButtons = document.querySelectorAll('input[type="radio"]'); // get all radio inputs
 
 // get all total elements
-let totalOldPrice = document.querySelector('.total-old-price');
-let totalNewPrice = document.querySelector('.total-actual-price');
-let totalDiscount = document.querySelector('.total-discount');
+let totalOldPrice = document.querySelector(".total-old-price");
+let totalNewPrice = document.querySelector(".total-actual-price");
+let totalDiscount = document.querySelector(".total-discount");
 
 // get price from input
 function getPrice(element, className) {
   const priceText = element.querySelector(className).textContent;
-  return parseFloat(priceText.replace('€', '').replace(',', '.'));
+  const price = parseFloat(priceText.replace("KČ", "").replace(",", "."));
+  return Math.round(price);
 }
 
 // formating price to neccessary format
 function formatPrice(price) {
-  return price.toFixed(2).replace('.', ',') + '  €';
+  return Math.round(price) + " KČ";
 }
 
 function handleRadioButtonChange(radioButton) {
@@ -144,10 +145,9 @@ function handleRadioButtonChange(radioButton) {
   let actualPrice = getPrice(radioButton.parentElement, '.package-actual-price');
   let oldPrice = getPrice(radioButton.parentElement, '.package-old-price');
 
-
   totalOldPrice.textContent = formatPrice(oldPrice);
   totalNewPrice.textContent = formatPrice(actualPrice);
-  totalDiscount.textContent = 'uložit ' + formatPrice((oldPrice - actualPrice));
+  totalDiscount.textContent = 'ušetřite ' + formatPrice(oldPrice - actualPrice);
 
 
   // update link for selected package
@@ -157,8 +157,8 @@ function handleRadioButtonChange(radioButton) {
     totalDiscount.classList.remove('hide')
   } else if (Number(selectedPackage) === 1) {
     addToCartLink.href = 'https://swisspower.co/cart/45079255515402:1';
-    totalOldPrice.classList.add('hide')
-    totalDiscount.classList.add('hide')
+    totalOldPrice.classList.remove('hide')
+    totalDiscount.classList.remove('hide')
   } else {
     addToCartLink.href = 'https://swisspower.co/cart/45079255515402:' + selectedPackage;
     totalOldPrice.classList.remove('hide')

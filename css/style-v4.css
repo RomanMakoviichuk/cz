@@ -333,7 +333,7 @@ main {
     color: #fff;
 }
 .package__item:nth-child(2)::after {
-    content:'dodání zdarma';
+    content:'doručení zdarma';
     position: absolute;
     top: -12px;
     left: calc(50% + (95px / 2));
@@ -354,7 +354,7 @@ main {
 }
 
 .package__item:last-child:before {
-    content: 'nejprodávanější';
+    content: 'nejoblíbenější';
     position: absolute;
     top: -12px;
     left: calc(50% - (95px / 2));
@@ -369,7 +369,7 @@ main {
     color: #fff;
 }
 .package__item:last-child::after {
-    content: 'dodání zdarma';
+    content: 'doručení zdarma';
     position: absolute;
     top: -12px;
     left: calc(50% + (95px / 2));
