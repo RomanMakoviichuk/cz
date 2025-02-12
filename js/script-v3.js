@@ -130,14 +130,21 @@ let totalDiscount = document.querySelector(".total-discount");
 
 // get price from input
 function getPrice(element, className) {
-  const priceText = element.querySelector(className).textContent;
-  const price = parseFloat(priceText.replace("KČ", "").replace(",", "."));
-  return Math.round(price);
+  const priceText = element.querySelector(className).textContent
+      .replace(/\s/g, '')
+      .replace(/[^\d,]/g, '')
+      .replace(",", "");
+  return parseInt(priceText) || 0;
 }
+
 
 // formating price to neccessary format
 function formatPrice(price) {
-  return Math.round(price) + " KČ";
+  let priceStr = price.toString();
+  if (price >= 1000) {
+    priceStr = priceStr.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+  return priceStr + " KČ";
 }
 
 function handleRadioButtonChange(radioButton) {
